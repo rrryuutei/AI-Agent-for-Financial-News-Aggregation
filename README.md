@@ -1,1 +1,1 @@
-# Ai-Agent-for-Financial-News-Aggregation-
+# AI-Agent-for-Financial-News-Aggregation
