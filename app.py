@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from agent import Agent
+from .agent import Agent
 
 
 
