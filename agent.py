@@ -5,9 +5,18 @@ import tiktoken
 import re
 from datetime import datetime
 
-API_KEY = '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'#'your api key'
-client = OpenAI(api_key=API_KEY)
+import requests
 
+proxies = {
+    'http': 'http://127.0.0.1:7890',
+    'https': 'http://127.0.0.1:7890',
+    'all': 'socks5://127.0.0.1:7890'
+}
+session = requests.session()
+session.proxies.update(proxies)
+
+API_KEY = '..'
+client = OpenAI(api_key=API_KEY)
 
 class Agent:
 
@@ -175,18 +184,11 @@ class Agent:
 
                 all_news[news['uuid']] = {'title': title, 'summary': summary, 'url': url, 'publisher': publisher, 'date': date, 'related stocks': related_stocks}
 
-
         # Step 4: Generate a report to answer the user's query
         report = self.generate_report(all_news=all_news, stock_data=stock_data, user_query=user_query)
 
-
         return {'report': report, 'stock data': stock_data, 'all news': all_news}
-
-
-
-
-
-
+    
     def _call_openai(self, prompt, gpt_model='default'):
         # base function to call OpenAI API with the specific prompt
 
@@ -221,8 +223,6 @@ class Agent:
 
         return tickers
     
-
-
     def get_stock_data(self, ticker):
         # retrieve relevant data about one stock ticker. Return a dictionary of info
 
@@ -242,8 +242,6 @@ class Agent:
                 'open': prices['Open'], 'close': prices['Close'], 
                 'high': prices['High'], 'low': prices['Low'], 
                 'volume': prices['Volume']}
-
-
     
     def extract_summarize_url(self, url):
         # extract content from a url and summarize
