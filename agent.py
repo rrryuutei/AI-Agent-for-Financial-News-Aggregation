@@ -15,7 +15,7 @@ proxies = {
 session = requests.session()
 session.proxies.update(proxies)
 
-API_KEY = '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'
+API_KEY = '..'
 client = OpenAI(api_key=API_KEY)
 
 class Agent:
