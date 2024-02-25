@@ -15,7 +15,7 @@ proxies = {
 session = requests.session()
 session.proxies.update(proxies)
 
-API_KEY = '..'
+API_KEY = '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'
 client = OpenAI(api_key=API_KEY)
 
 class Agent:
@@ -39,14 +39,38 @@ class Agent:
 
         self.stock_data = {}
         self.all_news = {}
+        self.answer = None
+        # retrieve stock data and news based on the user query
+        self._retrieve_stock_data()
 
         self.encoding = tiktoken.encoding_for_model(self.gpt_model)
 
 
-
+    ### User interface functions
     def retrieve_stock_data(self):
+        # Interface function to call to retrieve related stock data, including price and news based on the user query
+        return {'stock data': self.stock_data, 'all news': self.sorted_news}
+
+
+    def generate_answer(self, n_news = 3):
+        if not self.answer:
+            self._generate_answer(n_news = n_news)
+        return self.answer
+
+
+
+    
+        
+
+
+
+
+
+
+    ### Internal functions
+    def _retrieve_stock_data(self):
         """
-        This is the first function to call. This function retrieve related stock data, including price and news based on the user query
+        This is the function to retrieve related stock data, including price and news based on the user query
         The response include: 
         {
             "stock data": a dictionary of stock data of the format {TICKER: DATA}. Each DATA value is a dictionary:
@@ -72,22 +96,24 @@ class Agent:
 
 
         # Step 3: expand to related tickers
-        ticker_relevance = {}
-        for uuid in self.all_news:
-            relevance = self.all_news[uuid]['relevance']
-            for tk in self.all_news[uuid]['related stocks']:
-                if '^' in tk:
-                    # market index, do not consider
-                    continue
-                if tk not in self.stock_data:
-                    if tk not in ticker_relevance:
-                        ticker_relevance[tk] = 0
-                    ticker_relevance[tk] += relevance
-        # sort extra tickers based on relevance
-        sorted_tickers = sorted(list(ticker_relevance), key=lambda tk: ticker_relevance[tk], reverse=True)
-        # update stock data with top related tickers
-        print(ticker_relevance)
-        self.update_data_with_tickers(tickers=sorted_tickers[:2])
+        if len(self.stock_data) > 1:
+            # only consider extra tickers if there are more than 1 tickers (in case user is only asking about one stock, do not consider related stocks)
+            ticker_relevance = {}
+            for uuid in self.all_news:
+                relevance = self.all_news[uuid]['relevance']
+                for tk in self.all_news[uuid]['related stocks']:
+                    if '^' in tk:
+                        # market index, do not consider
+                        continue
+                    if tk not in self.stock_data:
+                        if tk not in ticker_relevance:
+                            ticker_relevance[tk] = 0
+                        ticker_relevance[tk] += relevance
+            # sort extra tickers based on relevance
+            sorted_tickers = sorted(list(ticker_relevance), key=lambda tk: ticker_relevance[tk], reverse=True)
+            # update stock data with top related tickers
+            max_tickers = min(2, len(self.stock_data)//2)    # only consider at most 2 related tickers
+            self.update_data_with_tickers(tickers=sorted_tickers[:max_tickers])
 
 
         # sort news based on relevance
@@ -95,13 +121,9 @@ class Agent:
         self.sorted_news = [item[1] for item in sorted_news_items][:5]
 
 
-        return {'stock data': self.stock_data, 'all news': self.sorted_news}
-    
-
-
-    def generate_answer(self, n_news = 3):
+    def _generate_answer(self, n_news):
         """
-        This is the second function to call. This function generates a summarized answer to the user query, based on all retrieved stock data and news.
+        After initialization with the stock news and data, this function generates a summarized answer to the user query, based on all retrieved stock data and news.
         The response is a string of answer summarizing all the information about the data for the user query.
         """
 
@@ -120,8 +142,7 @@ class Agent:
                 Please answer the query based on some or all of the news provided. Your answer should be focused on the user's initial query, and \
                 elaborating in a professional, consice, and insightful manner."
         
-        return self._call_openai(prompt=prompt)
-    
+        self.answer = self._call_openai(prompt=prompt)
 
 
     
