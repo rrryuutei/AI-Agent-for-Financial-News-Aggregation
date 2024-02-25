@@ -11,11 +11,13 @@ def index():
     if request.method == 'POST':
         user_input = request.form['user_input']
         # Your Python script's logic here, using user_input and making API calls
-        agent = Agent()
-        response = agent.execute(user_input)
+        agent = Agent(user_input)
+        response = agent.retrieve_stock_data()
+        answer = agent.generate_answer()
+
         # return render_template('response.html', response=response['report'])
         return jsonify({
-            'report': response['report'],
+            'report': answer,
             'stock_data': response['stock data'],
             'all_news': response['all news']
         })
