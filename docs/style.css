@@ -1,31 +1,74 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
-    color: #333; /* Standard text color; adjust as needed */
-    background-color: #f0f0f0; /* Light background to make text pop */
-}
-
-h1, h2, h3 {
-    font-family: 'Lato', sans-serif;
-    color: #007bff; /* A vivid color for headings */
-}
-
-p {
-    color: #555; /* Slightly lighter text color for paragraphs */
-    font-size: 16px;
+    color: #333;
+    background-color: #f0f0f0;
     line-height: 1.6;
+    margin: 20px;
 }
 
-/* Example class for vivid text sections */
-.vivid-text {
-    color: #d63384; /* Bright, attention-grabbing color */
-    font-weight: 700; /* Makes the font bold */
-    background-color: #e9ecef; /* Subtle background color */
+header {
+    background-color: #f4f4f4;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 5px;
+    font-family: 'Lato', sans-serif;
+    color: #007bff;
+}
+
+header p {
+    color: #333;
+}
+
+section {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h2 {
+    font-family: 'Lato', sans-serif;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+p, li {
+    color: #555;
+    font-size: 16px;
+}
+
+.vivid-text, li {
+    color: #d63384; /* Bright color for vivid text and list items */
+    background-color: #e9ecef;
     padding: 10px;
-    border-radius: 5px; /* Adds rounded corners */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-weight: 700;
 }
 
-/* Enhance list items */
-li {
-    color: #17a2b8; /* Color for list items */
+/* Styling for images and videos */
+img, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Centering media */
 }
+
+/* Adjusting figure size specifically */
+#workflow-figure img {
+    max-width: 80%; /* Adjust this value as needed to resize your figure */
+    height: auto; /* Maintains aspect ratio */
+}
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@900&display=swap');
