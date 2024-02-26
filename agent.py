@@ -48,6 +48,16 @@ class Agent:
 
     ### User interface functions
     def retrieve_stock_data(self):
+        return self.stock_data, self.sorted_news
+
+
+    def generate_answer(self):
+        self._generate_answer(n_news=3)
+        return self.answer
+
+
+
+    def _retrieve_stock_data(self):
         """
         This is the first function to call. This function retrieve related stock data, including price and news based on the user query
         The response include: 
@@ -76,8 +86,7 @@ class Agent:
             self.sorted_news = [item[1] for item in sorted_news_items][:3]
 
             # The answer to the user will be a prompt to ask for more specific query
-            self.answer =  'Your question might be too broad. I have prepared general stock market index data and news for you. \
-                If this is not what you are looking for, please try to be more specific in your question. For example, ask me "How did the AI stocks perform?"'
+            self.answer =  'Your question might be too broad. I have prepared general stock market index data and news for you. If this is not what you are looking for, please try to be more specific in your question. For example, ask me "How did the AI stocks perform?"'
             return
         
 
@@ -164,7 +173,8 @@ class Agent:
             Based on the query, please generate a list of most relavant stock tickers to answer this query. \
             Please only include tickers that are necessary to answer this question, and order them by relevance. \
             If the question is too broad or there are too many related stocks, give the top most relevant ones. \
-            Your answer should be a string with tickers separeted by spaces, e.g. AAPL MSFT."
+            Your answer should be a string with tickers separeted by spaces, e.g. \n \
+            Answer: AAPL MSFT TSLA"
         
         response = self._call_openai(prompt=prompt)
         
@@ -172,9 +182,8 @@ class Agent:
         for tk in response.split():
             # clean up chars
             tk_clean = ''.join(re.findall(r'[A-Z\^]', tk))
-            if len(tk_clean) > 0 and len(tk)-len(tk_clean) < 3:
-                tickers.append(tk)
-
+            if len(tk_clean) > 0 and len(tk)-len(tk_clean) < 3 and tk_clean not in tickers:
+                tickers.append(tk_clean)
         return tickers
     
     
@@ -193,10 +202,11 @@ class Agent:
 
         latest_date = str(T)[:10]
 
-        return {'news': news, 'latest date': latest_date, 
-                'open': prices['Open'], 'close': prices['Close'], 
-                'high': prices['High'], 'low': prices['Low'], 
-                'volume': prices['Volume']}
+        # show price with 2 decimal points
+        return {'news': news, 'Date': latest_date, 
+                'Open': round(prices['Open'], 2), 'Close': round(prices['Close'], 2), 
+                'High': round(prices['High'], 2), 'Low': round(prices['Low'], 2), 
+                'Volume': prices['Volume']}
     
 
 
@@ -298,57 +308,57 @@ class Agent:
         return self._call_openai(prompt=prompt)
 
 
-def execute(self, user_query):
-        """
-        LEGACY FUNCTION. NOT IN USE.
+    def execute(self, user_query):
+            """
+            LEGACY FUNCTION. NOT IN USE.
 
-        This is the main function to call. The agent takes in user query, and return aggregated response.
-        The response include: 
-        {
-            "report": a string of report summarizing all the information about the data about the query,
-            "stock data": a dictionary of stock data of the format {TICKER: DATA}. Each DATA value is a dictionary:
-                {'latest date': latest_date, 'open': open price, 'close': close price, 'high': daily highest price, 'low': daily lowest price, 'volume': daily volume}
-            "all_news": a dictionary of all related news with uuid as the keys, each is a dictionary {"title": TITLE, "summary": SUMMARY, "url": URL, "publisher": PUBLISHER, "date": DATE}
-            }
-        """
+            This is the main function to call. The agent takes in user query, and return aggregated response.
+            The response include: 
+            {
+                "report": a string of report summarizing all the information about the data about the query,
+                "stock data": a dictionary of stock data of the format {TICKER: DATA}. Each DATA value is a dictionary:
+                    {'latest date': latest_date, 'open': open price, 'close': close price, 'high': daily highest price, 'low': daily lowest price, 'volume': daily volume}
+                "all_news": a dictionary of all related news with uuid as the keys, each is a dictionary {"title": TITLE, "summary": SUMMARY, "url": URL, "publisher": PUBLISHER, "date": DATE}
+                }
+            """
 
-        # Step 1: Get stock tickers to retrieve data
-        for trial in range(3):
-            # try multiple times until the response is good with reasonable values of tickers
-            tickers = self.select_stock_tickers(user_query=user_query)
-            if len(tickers) <= 10:
-                break
+            # Step 1: Get stock tickers to retrieve data
+            for trial in range(3):
+                # try multiple times until the response is good with reasonable values of tickers
+                tickers = self.select_stock_tickers(user_query=user_query)
+                if len(tickers) <= 10:
+                    break
 
-        # Step 2: Retrieve financial data for the tickers
-        stock_data = {}
-        for ticker in tickers:
-            cleaned_ticker = ''.join(re.findall(r'[A-Z]', ticker))
-            try:
-                stock_data[cleaned_ticker] = self.get_stock_data(ticker=cleaned_ticker)
-            except:
-                continue
-
-        # Step 3: extract article content from each news url and summarize
-        all_news = {}
-        for ticker in stock_data:
-            # get all stock news
-            stock_news = stock_data[ticker].pop('news')
-
-            for news in stock_news:
-                if news['uuid'] in all_news:
+            # Step 2: Retrieve financial data for the tickers
+            stock_data = {}
+            for ticker in tickers:
+                cleaned_ticker = ''.join(re.findall(r'[A-Z]', ticker))
+                try:
+                    stock_data[cleaned_ticker] = self.get_stock_data(ticker=cleaned_ticker)
+                except:
                     continue
 
-                # extract from url
-                url = news['link']
-                summary = self.extract_summarize_url(url = url)
-                title = news['title']
-                date = datetime.fromtimestamp(news['providerPublishTime']).strftime('%Y-%m-%d')
-                publisher = news['publisher']
-                related_stocks = news['relatedTickers']
+            # Step 3: extract article content from each news url and summarize
+            all_news = {}
+            for ticker in stock_data:
+                # get all stock news
+                stock_news = stock_data[ticker].pop('news')
 
-                all_news[news['uuid']] = {'title': title, 'summary': summary, 'url': url, 'publisher': publisher, 'date': date, 'related stocks': related_stocks}
+                for news in stock_news:
+                    if news['uuid'] in all_news:
+                        continue
 
-        # Step 4: Generate a report to answer the user's query
-        report = self.generate_report(all_news=all_news, stock_data=stock_data, user_query=user_query)
+                    # extract from url
+                    url = news['link']
+                    summary = self.extract_summarize_url(url = url)
+                    title = news['title']
+                    date = datetime.fromtimestamp(news['providerPublishTime']).strftime('%Y-%m-%d')
+                    publisher = news['publisher']
+                    related_stocks = news['relatedTickers']
 
-        return {'report': report, 'stock data': stock_data, 'all news': all_news}
+                    all_news[news['uuid']] = {'title': title, 'summary': summary, 'url': url, 'publisher': publisher, 'date': date, 'related stocks': related_stocks}
+
+            # Step 4: Generate a report to answer the user's query
+            report = self.generate_report(all_news=all_news, stock_data=stock_data, user_query=user_query)
+
+            return {'report': report, 'stock data': stock_data, 'all news': all_news}
