@@ -52,7 +52,8 @@ class Agent:
 
 
     def generate_answer(self):
-        self._generate_answer(n_news=3)
+        if self.answer is None:
+            self._generate_answer(n_news=3)
         return self.answer
 
 
