@@ -1,25 +1,71 @@
-body {
-    font-family: Arial, sans-serif;
+/* Basic Reset */
+* {
     margin: 0;
     padding: 0;
-    text-align: center;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
 }
 
 header {
-    background-color: #f8f9fa;
-    padding: 20px;
+    background-color: #f4f4f4;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 5px;
+}
+
+header p {
+    color: #333;
 }
 
 section {
-    margin: 20px 0;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-video {
-    max-width: 80%;
-    height: auto;
+h2 {
+    color: #333;
+    margin-bottom: 10px;
 }
 
-img {
-    max-width: 80%;
-    height: auto;
+p {
+    margin-bottom: 20px;
 }
+
+.aligned-list {
+    text-align: left;
+    margin: 0 auto 20px;
+    padding-left: 20px; /* Adjusted for alignment */
+}
+
+.aligned-list li {
+    margin-bottom: 10px;
+}
+
+video, img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Centering media */
+}
+
+/* Additional styling for video section */
+#demo-video {
+    background-color: #e9ecef;
+    border-radius: 8px;
+}
+
+/* Styling for the workflow section */
+#workflow {
+    background-color: #fff;
+}
+
