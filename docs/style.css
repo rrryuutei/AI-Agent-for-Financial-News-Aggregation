@@ -68,3 +68,13 @@ h2 {
 .aligned-list li {
     color: #17a2b8; /* Color for list items for better visibility */
 }
+
+
+header p a {
+    color: #007bff; /* Blue color for links */
+    text-decoration: none; /* Removes underline from links */
+}
+
+header p a:hover {
+    text-decoration: underline; /* Adds underline on hover for better usability */
+}
