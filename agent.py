@@ -15,7 +15,7 @@ proxies = {
 session = requests.session()
 session.proxies.update(proxies)
 
-API_KEY = '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'
+API_KEY = '..'
 client = OpenAI(api_key=API_KEY)
 
 class Agent:
@@ -48,29 +48,8 @@ class Agent:
 
     ### User interface functions
     def retrieve_stock_data(self):
-        # Interface function to call to retrieve related stock data, including price and news based on the user query
-        return {'stock data': self.stock_data, 'all news': self.sorted_news}
-
-
-    def generate_answer(self, n_news = 3):
-        if not self.answer:
-            self._generate_answer(n_news = n_news)
-        return self.answer
-
-
-
-    
-        
-
-
-
-
-
-
-    ### Internal functions
-    def _retrieve_stock_data(self):
         """
-        This is the function to retrieve related stock data, including price and news based on the user query
+        This is the first function to call. This function retrieve related stock data, including price and news based on the user query
         The response include: 
         {
             "stock data": a dictionary of stock data of the format {TICKER: DATA}. Each DATA value is a dictionary:

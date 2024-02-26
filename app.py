@@ -1,29 +1,35 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request
 from agent import Agent
-from flask_cors import CORS, cross_origin
-
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app, resources={r"/": {"origins": "*", "methods": ["GET", "POST"]}})
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        user_input = request.form['user_input']
-        # Your Python script's logic here, using user_input and making API calls
-        agent = Agent(user_input)
-        response = agent.retrieve_stock_data()
-        answer = agent.generate_answer()
+# add a new route handling function to fetch stock data
+@app.route('/fetch-stock-data', methods=['POST'])
+def fetch_stock_data():
+    user_input = request.json['user_input']
+    print("user_input"+user_input)
+    agent = Agent(user_input)
+    response = agent.retrieve_stock_data()
+    # return stock data
+    return jsonify({
+        'stock_data': response['stock data'],
+        'all_news': response['all news'] 
+    })
 
-        # return render_template('response.html', response=response['report'])
-        return jsonify({
-            'report': answer,
-            'stock_data': response['stock data'],
-            'all_news': response['all news']
-        })
-    return render_template('index.html')  # A form for user input
-
-
+# add a new route handling function to fetch generated answer
+@app.route('/fetch-generated-answer', methods=['POST'])
+def fetch_generated_answer():
+    user_input = request.json['user_input']
+    agent = Agent(user_input)
+    # response = agent.retrieve_stock_data()
+    answer = agent.generate_answer()
+    # return generated answer
+    return jsonify({
+        'report': answer
+        # 
+    })
 
 if __name__ == '__main__':
     app.run(debug=True)
