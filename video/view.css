@@ -1,0 +1,23 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+video {
+  /* 使视频自适应屏幕 */
+  min-width: 100%;
+  min-height: 100%;
+  
+  /* 使视频居中显示 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

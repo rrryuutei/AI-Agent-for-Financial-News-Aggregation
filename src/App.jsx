@@ -111,14 +111,14 @@ function App() {
         <p className='text-6xl font-bold'>Stay Ahead, Stay Informed</p>
         <p className='text-6xl font-bold'>Al-Powered</p>
         <div className=''>
-          <p className='mt-3 text-xl'>Transforming financial news with Al precision. Get real-time, personalized updates from 10,000+ sources, tailored to your investmentpreferences. Simplify decision-making and stay ahead in the market, effortlessly</p>
+          <p className='mt-3 text-xl'>Transforming financial news with Al precision. Get real-time, personalized updates from 10,000+ sources, tailored to your investmentpreferences. Simplify decision-making and stay ahead in the market, effortlessly.</p>
         </div>
         <div className='mt-4 flex gap-x-4 justify-center text-white'>
           <input onChange={e => setSearchVal(e.target.value)} value={searchVal}
             className='w-96 px-3 text-black border-black border rounded-md' placeholder='Enter something...' type="text" />
           <div onClick={async _ => {
             const count = readCount()
-            if (count > 30) {
+            if (count > 40) {
               message.info('Exceeded maximum number of times')
               return
             }
@@ -138,10 +138,11 @@ function App() {
           {/* <p className='font-bold'>Example</p> */}
 
           <div className='flex gap-x-4 justify-center'>
-            <p onClick={_ => setSearchVal("can you tell me nvidia‘s stock today?")}
-              className='hover:font-bold hover:color-gray-800 transition-all cursor-pointer'>Can you tell me nvidia‘s stock today?</p>
-            <p onClick={_ => setSearchVal("can you tell me AI realted company' news today?")}
-              className='hover:font-bold hover:color-gray-800 transition-all cursor-pointer'>Can you tell me AI realted company' news today?</p>
+            <p onClick={_ => setSearchVal("Can you analyze Tesla’s potential in the stock market?")}
+              className='hover:font-bold hover:color-gray-800 transition-all cursor-pointer'>Can you analyze Tesla’s potential in the stock market as of today?</p>
+            <p onClick={_ => setSearchVal("What companies benefit most from the AI revolutionas of today<?")}
+              className='hover:font-bold hover:color-gray-800 transition-all cursor-pointer'>What companies benefit most from the AI revolution?
+              </p>
           </div>
         </div>
 
