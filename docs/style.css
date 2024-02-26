@@ -10,7 +10,6 @@ body {
     color: #333;
     background-color: #f0f0f0;
     line-height: 1.6;
-    margin: 20px;
 }
 
 header {
@@ -19,56 +18,53 @@ header {
     text-align: center;
 }
 
-header h1 {
-    margin-bottom: 5px;
-    font-family: 'Lato', sans-serif;
-    color: #007bff;
-}
-
-header p {
+header h1, p {
     color: #333;
 }
 
 section {
-    margin-bottom: 20px;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 
 h2 {
     font-family: 'Lato', sans-serif;
     color: #007bff;
-    margin-bottom: 10px;
 }
 
-p, li {
+.vivid-text p, .vivid-text li {
     color: #555;
     font-size: 16px;
 }
 
-.vivid-text, li {
-    color: #d63384; /* Bright color for vivid text and list items */
+.aligned-list {
+    padding-left: 20px;
+}
+
+.workflow-figure img {
+    max-width: 100%; /* Ensures the image is not larger than its container */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Centers the image in its container */
+    margin: 0 auto; /* Additional centering for the image */
+}
+
+.video, .workflow-figure {
     background-color: #e9ecef;
-    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center; /* Center content */
+    padding: 20px;
+}
+
+/* Additional styles for text and list */
+.vivid-text {
+    background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    font-weight: 700;
+    margin: 20px; /* Adds space around the vivid text section */
+    padding: 20px; /* Inner spacing */
 }
 
-/* Styling for images and videos */
-img, video {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto; /* Centering media */
+.aligned-list li {
+    color: #17a2b8; /* Color for list items for better visibility */
 }
-
-/* Adjusting figure size specifically */
-#workflow-figure img {
-    max-width: 80%; /* Adjust this value as needed to resize your figure */
-    height: auto; /* Maintains aspect ratio */
-}
-
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@900&display=swap');
