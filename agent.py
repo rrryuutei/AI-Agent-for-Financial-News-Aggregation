@@ -15,7 +15,7 @@ proxies = {
 session = requests.session()
 session.proxies.update(proxies)
 
-API_KEY = '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'
+API_KEY = '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'
 client = OpenAI(api_key=API_KEY)
 
 class Agent:
@@ -81,16 +81,27 @@ class Agent:
         """
 
         # Step 1: Get stock tickers to retrieve data
-        for trial in range(3):
+        for trial in range(2):
             # try multiple times until the response is good with reasonable values of tickers
             tickers = self.select_stock_tickers()
-            if len(tickers) <= 10:
+            if 0 < len(tickers) <= 6:
                 break
 
-        if len(tickers) > 10:
-            # Error: ask user to be more specific
-            return 'Your question can be too broad. Please try to be more specific in the query. For example, ask me "How did the GPU stocks performe?"'
+
+        if len(tickers) > 6 or len(tickers) == 0:
+            # Error: the user's query is too broad or not relevant
+            # Get only general stock market index
+            self.update_data_with_tickers(tickers=['^GSPC', '^DJI', '^IXIC'])
+            # sort news based on relevance
+            sorted_news_items = sorted(self.all_news.items(), key=lambda item: item[1]['relevance'], reverse=True)
+            self.sorted_news = [item[1] for item in sorted_news_items][:3]
+
+            # The answer to the user will be a prompt to ask for more specific query
+            self.answer =  'Your question might be too broad. I have prepared general stock market index data and news for you. \
+                If this is not what you are looking for, please try to be more specific in your question. For example, ask me "How did the AI stocks perform?"'
+            return
         
+
         # Step 2: retrieve stock data and news based on the tickers
         self.update_data_with_tickers(tickers=tickers)
 
@@ -135,11 +146,11 @@ class Agent:
 
         prompt = f"The user has asked the following query: \
                 {self.user_query} \n \
-                I have prepared all the related news and data about the stockes related to this query. \
+                I have prepared all the related news and data about the stockes related to this query and presented to the user. \
                 Your task now is to answer the user's query in a nice and professional manner, using the stock news and data provided. \
                 Here are the related news articles: \n \
                     {all_news_string} \n\n \
-                Please answer the query based on some or all of the news provided. Your answer should be focused on the user's initial query, and \
+                Please make a direct answer to the user, based on some or all of the news provided. Your answer should be focused on the user's initial query, and \
                 elaborating in a professional, consice, and insightful manner."
         
         self.answer = self._call_openai(prompt=prompt)
@@ -176,7 +187,14 @@ class Agent:
             If the question is too broad or there are too many related stocks, give the top most relevant ones. \
             Your answer should be a string with tickers separeted by spaces, e.g. AAPL MSFT."
         
-        tickers = self._call_openai(prompt=prompt).split(' ')
+        response = self._call_openai(prompt=prompt)
+        
+        tickers = []
+        for tk in response.split():
+            # clean up chars
+            tk_clean = ''.join(re.findall(r'[A-Z\^]', tk))
+            if len(tk_clean) > 0 and len(tk)-len(tk_clean) < 3:
+                tickers.append(tk)
 
         return tickers
     
@@ -206,7 +224,7 @@ class Agent:
     def update_data_with_tickers(self, tickers):
         # Step 2: Retrieve financial data for the tickers
         for ticker in tickers:
-            cleaned_ticker = ''.join(re.findall(r'[A-Z]', ticker))
+            cleaned_ticker = ''.join(re.findall(r'[A-Z\^]', ticker))
             try:
                 self.stock_data[cleaned_ticker] = self.get_stock_data(ticker=cleaned_ticker)
             except:
