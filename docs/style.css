@@ -42,7 +42,7 @@ h2 {
 }
 
 .workflow-figure img {
-    max-width: 100%; /* Ensures the image is not larger than its container */
+    max-width: 80%; /* Ensures the image is not larger than its container */
     height: auto; /* Maintains aspect ratio */
     display: block; /* Centers the image in its container */
     margin: 0 auto; /* Additional centering for the image */
