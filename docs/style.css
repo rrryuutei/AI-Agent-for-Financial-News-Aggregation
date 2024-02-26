@@ -1,71 +1,31 @@
-/* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    margin: 20px;
+    font-family: 'Roboto', sans-serif;
+    color: #333; /* Standard text color; adjust as needed */
+    background-color: #f0f0f0; /* Light background to make text pop */
 }
 
-header {
-    background-color: #f4f4f4;
-    padding: 20px 0;
-    text-align: center;
-}
-
-header h1 {
-    margin-bottom: 5px;
-}
-
-header p {
-    color: #333;
-}
-
-section {
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-h2 {
-    color: #333;
-    margin-bottom: 10px;
+h1, h2, h3 {
+    font-family: 'Lato', sans-serif;
+    color: #007bff; /* A vivid color for headings */
 }
 
 p {
-    margin-bottom: 20px;
+    color: #555; /* Slightly lighter text color for paragraphs */
+    font-size: 16px;
+    line-height: 1.6;
 }
 
-.aligned-list {
-    text-align: left;
-    margin: 0 auto 20px;
-    padding-left: 20px; /* Adjusted for alignment */
+/* Example class for vivid text sections */
+.vivid-text {
+    color: #d63384; /* Bright, attention-grabbing color */
+    font-weight: 700; /* Makes the font bold */
+    background-color: #e9ecef; /* Subtle background color */
+    padding: 10px;
+    border-radius: 5px; /* Adds rounded corners */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
 }
 
-.aligned-list li {
-    margin-bottom: 10px;
+/* Enhance list items */
+li {
+    color: #17a2b8; /* Color for list items */
 }
-
-video, img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto; /* Centering media */
-}
-
-/* Additional styling for video section */
-#demo-video {
-    background-color: #e9ecef;
-    border-radius: 8px;
-}
-
-/* Styling for the workflow section */
-#workflow {
-    background-color: #fff;
-}
-
