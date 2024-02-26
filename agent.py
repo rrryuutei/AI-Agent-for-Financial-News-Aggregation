@@ -15,7 +15,7 @@ proxies = {
 session = requests.session()
 session.proxies.update(proxies)
 
-API_KEY = '..'
+API_KEY = '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'
 client = OpenAI(api_key=API_KEY)
 
 class Agent:
@@ -48,7 +48,7 @@ class Agent:
 
     ### User interface functions
     def retrieve_stock_data(self):
-        return self.stock_data, self.sorted_news
+        return {'stock data': self.stock_data, 'all news': self.sorted_news}
 
 
     def generate_answer(self):
@@ -92,7 +92,7 @@ class Agent:
         
 
         # Step 2: retrieve stock data and news based on the tickers
-        self.update_data_with_tickers(tickers=tickers)
+        self.update_data_with_tickers(tickers=tickers[:3])
 
 
         # Step 3: expand to related tickers
@@ -112,7 +112,7 @@ class Agent:
             # sort extra tickers based on relevance
             sorted_tickers = sorted(list(ticker_relevance), key=lambda tk: ticker_relevance[tk], reverse=True)
             # update stock data with top related tickers
-            max_tickers = min(2, len(self.stock_data)//2)    # only consider at most 2 related tickers
+            max_tickers = min(1, len(self.stock_data)//2)    # only consider at most 2 related tickers
             self.update_data_with_tickers(tickers=sorted_tickers[:max_tickers])
 
 
@@ -140,7 +140,7 @@ class Agent:
                 Here are the related news articles: \n \
                     {all_news_string} \n\n \
                 Please make a direct answer to the user, based on some or all of the news provided. Your answer should be focused on the user's initial query, and \
-                elaborating in a professional, consice, and insightful manner."
+                answer in a professional, consice, and insightful manner. Your answer should be limited to 200 words."
         
         self.answer = self._call_openai(prompt=prompt)
 
@@ -204,10 +204,12 @@ class Agent:
         latest_date = str(T)[:10]
 
         # show price with 2 decimal points
-        return {'news': news, 'Date': latest_date, 
-                'Open': round(prices['Open'], 2), 'Close': round(prices['Close'], 2), 
-                'High': round(prices['High'], 2), 'Low': round(prices['Low'], 2), 
-                'Volume': prices['Volume']}
+        
+        
+        return {'news': news, 'latest_date': latest_date, 
+                'open': round(prices['Open'], 2), 'close': round(prices['Close'], 2), 
+                'high': round(prices['High'], 2), 'low': round(prices['Low'], 2), 
+                'volume': prices['Volume']}
     
 
 

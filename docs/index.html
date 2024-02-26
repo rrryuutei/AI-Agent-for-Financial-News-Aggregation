@@ -10,39 +10,65 @@
 <body>
     <header>
         <h1>AI Agent for Financial News</h1>
-        <header>
-    <p>My Homepage: <a href="https://github.com/rrryuutei" target="_blank">Nora (Ting) Liu</a></p>
-</header>
-
-        <p>Team Members: Nora (Ting) Liu, Ted Zhao</p>
+        <p>Code: <a href="https://github.com/rrryuutei/AI-Agent-for-Financial-News-Aggregation " target="_blank">Github Page</a></p>
+        <p>Team Members: <a href="https://www.linkedin.com/in/tingliu319/">Nora (Ting) Liu</a>, Ted Zhao</p>
     </header>
 
-    <section id="demo-video">
-        <h2>Demo Video</h2>
-        <video controls>
-            <source src="sample_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </section>
-<div class="vivid-text">
-    <section id="workflow">
-        <h2>What's Under the Hood?</h2>
-        <p>GPT-4 does not know anything after Sept. 2021. Our AI agent is able to utilize external tools like APIs to retrieve what it needs. <br>
-            In this way we inject the most recent news and data into the model. Here is how it works:</p>
-        <ol class="aligned-list">
-            <li>Planning: The AI agent determine what are the most relevant stock to explore to answer the user's question.</li>
-            <li>Retrieving: The AI agent use API to retrieve the most recent data and news about the stocks.</li>
-            <li>Analyzing: By analyzing the recent data and news, the AI agent is able to retrospect on its initial planning and retrieve more data to reflect the most recent trend.</li>
-            <li>Summarizing: A well-written answer is summarized by the AI agent based on all the relevant news and data, with grounding information provided for the user.</li>
-        </ol>
-    </section>
-</div>
-
-<div class="workflow-figure">
-    <img src="AIAgent.png" alt="Workflow Figure">
-</div>
 
     
+    <section id="demo-video">
+        <h2>Demo Videos</h2>
+        <div class="video-container">
+            <div class="video-item">
+                <video controls autoplay muted>
+                    <source src="sample_video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p>“Can You Tell Me About Apple's News Today?”</p>
+            </div>
+            <div class="video-item">
+                <video controls autoplay muted>
+                    <source src="sample_video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p>“Can You Tell Me About AI Realted Company's News Today?”</p>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <div class="vivid-text">
+        <section id="workflow">
+            <h2>What's Under the Hood?</h2>
+            <p>GPT-4 does not know anything after Sept. 2021.  <br>
+                Our AI agent is able to utilize external tools like APIs to retrieve what it needs. In this way we inject the most recent news and data into the model. Here is how it works:</p>
+            <ol class="aligned-list">
+                <li><strong> Planning: <strong> Determine what are the most relevant stock to exploreOur AI agent is able to utilize external tools like APIs to retrieve what it needs.</li>
+                <li><strong> Retrieving:<strong>  Use API to retrieve the most recent data and news about the stocks.</li>
+                <li><strong> Analyzing: Analyz <strong> the recent data and news, retrospect on its initial planning and retrieve more data to reflect the most recent trend.</li>
+                <li><strong> Summarizing: <strong> A well-written answer is summarized by the AI agent based on all the relevant news and data, with grounding information provided for the user.</li>
+            </ol>
+        </section>
+    </div>
+
+    <div class="workflow-figure">
+        <img src="AIAgent.png" alt="Workflow Figure">
+    </div>
+
+    <div class="vivid-text">
+        <section id="workflow">
+            <h2>Technical Details</h2>
+            <ol class="aligned-list"> 
+                <li>Skills: Python, Flask,  React.js, Vite.js, Node. js, Websocket <li> 
+                <li>Back-end: <br> 
+                    ·Integrating Open API and Yahoo Finance API to retrieve news and stock market data, followed by summarization and categorization<br> ·Employing Flask for Cross-Origin Resource Sharing (CORS) configuration to ensure that front-end applications can securely request resources from various origins. </li>
+                <li>Front-end:  <br> 
+                    ·Async Requests & Error Handling:Concurrently fetch data in React, tracking progress and handling errors gracefully with state management<br> ·Event Listening & State Updates: Implement dynamic content visibility in React through wheel event listening and responsive state updates</li>
+                
+            </ol>
+        </section>
+    </div>
 
 </body>
 </html>

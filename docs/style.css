@@ -1,80 +1,132 @@
-/* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: #eff3f6;
     color: #333;
-    background-color: #f0f0f0;
     line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
+
+a {
+    color: #6ea9e7;
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    color: #414648;
+    text-decoration: underline;
+}
+
 
 header {
-    background-color: #f4f4f4;
-    padding: 20px 0;
+    background:  #0f47a6 100%;
+    padding: 20px;
     text-align: center;
+    color: #fff;
 }
 
-header h1, p {
-    color: #333;
+header h1 {
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+header p {
+    margin: 10px 0;
+}
+
 
 section {
+    background-color: #ffffff;
     padding: 20px;
-    margin-bottom: 20px;
+    margin: 20px auto;
+    max-width: 1000px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 h2 {
     font-family: 'Lato', sans-serif;
-    color: #007bff;
+    color: #0056b3;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 4px;
+    background: #007bff;
+}
+
+.vivid-text, .workflow-figure {
+    background-color: #f8f9fa;
+    border-left: 4px solid #007bff;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.aligned-list li {
+    margin-bottom: 10px;
+}
+
+.workflow-figure img {
+    max-width: 80%; 
+    height: auto; 
+    border-radius: 4px; 
+    /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);  */
+    display: block; 
+    margin: 0 auto; 
+}
+
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .vivid-text p, .vivid-text li {
     color: #555;
     font-size: 16px;
+    line-height: 1.8;
 }
 
 .aligned-list {
-    padding-left: 20px;
+    list-style-type: none;
 }
 
-.workflow-figure img {
-    max-width: 80%; /* Ensures the image is not larger than its container */
-    height: auto; /* Maintains aspect ratio */
-    display: block; /* Centers the image in its container */
-    margin: 0 auto; /* Additional centering for the image */
+.aligned-list li::before {
+    content: '•';
+    color: #007bff;
+    font-weight: bold;
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1em;
+}
+.video-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start; 
+    flex-wrap: wrap;
 }
 
-.video, .workflow-figure {
-    background-color: #e9ecef;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    text-align: center; /* Center content */
-    padding: 20px;
+.video-item {
+    width: 48%; 
+    margin-bottom: 20px; 
 }
 
-/* Additional styles for text and list */
-.vivid-text {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin: 20px; /* Adds space around the vivid text section */
-    padding: 20px; /* Inner spacing */
+video {
+    width: 100%; 
+    height: auto;
 }
 
-.aligned-list li {
-    color: #17a2b8; /* Color for list items for better visibility */
+.video-item p {
+    text-align: center; 
+    color: #333; 
+    font-size: 16px;
+    margin-top: 10px; 
 }
 
-
-header p a {
-    color: #007bff; /* Blue color for links */
-    text-decoration: none; /* Removes underline from links */
-}
-
-header p a:hover {
-    text-decoration: underline; /* Adds underline on hover for better usability */
-}

@@ -81,7 +81,7 @@ function App() {
         <div className='flex gap-x-3'>
           <Button onClick={_ => confirm({
             title: 'Contact Us',
-            content: 'please email at noraliu319@gmail.com.',
+            content: 'Please emain at noraliu319@gmail.com...',
             onOk() {
               console.log('OK');
             },
@@ -118,7 +118,7 @@ function App() {
             className='w-96 px-3 text-black border-black border rounded-md' placeholder='Enter something...' type="text" />
           <div onClick={async _ => {
             const count = readCount()
-            if (count > 10) {
+            if (count > 30) {
               message.info('Exceeded maximum number of times')
               return
             }
@@ -135,19 +135,20 @@ function App() {
           </div>
         </div>
         <div className='mt-4 text-gray-400'>
-          <p className='font-bold'>example</p>
+          {/* <p className='font-bold'>Example</p> */}
+
           <div className='flex gap-x-4 justify-center'>
             <p onClick={_ => setSearchVal("can you tell me nvidia‘s stock today?")}
-              className='hover:font-bold hover:color-gray-800 transition-all cursor-pointer'>can you tell me nvidia‘s stock today?</p>
-            <p onClick={_ => setSearchVal("can you tell me AI realted company's news today?")}
-              className='hover:font-bold hover:color-gray-800 transition-all cursor-pointer'>can you tell me AI realted company's news today?</p>
+              className='hover:font-bold hover:color-gray-800 transition-all cursor-pointer'>Can you tell me nvidia‘s stock today?</p>
+            <p onClick={_ => setSearchVal("can you tell me AI realted company' news today?")}
+              className='hover:font-bold hover:color-gray-800 transition-all cursor-pointer'>Can you tell me AI realted company' news today?</p>
           </div>
         </div>
 
         {
           stockAndNew || report !== ''
             ?
-            <Popover content={"Scroll down to view results"} title="Click to view the results just nowd">
+            <Popover content={"Scroll down to view results"} title="Click to view the results just Showd!">
               <div onClick={_ => setIsContent(true)}
                 className='animate-bounce w-14 h-14 mx-auto text-gray-700 rounded-full flex justify-center items-center text-4xl font-bold mt-20 p-4 bg-black bg-opacity-10 cursor-pointer hover:text-blue-700'>
                 <p className='select-none'>↓</p>
@@ -192,7 +193,7 @@ function App() {
 
               <div>
                 <p className='text-center text-2xl font-bold'>Stock</p>
-                <div className='w-full text-lg py-4 overflow-auto'>
+                <div className='w-full text-lg py-3 overflow-auto'>
                   <div className=''>
                     {
                       Object.keys(stockAndNew.stock_data).length !== 0
@@ -202,27 +203,28 @@ function App() {
                             <p>{key}</p>
                             <div className='flex gap-x-4 justify-center'>
                               <div className='flex justify-center text-left'>
-                                <p className='mr-4 text-left'>close:</p>
-                                <p className='text-center text-rose-600'>{stockAndNew.stock_data[key].close}</p>
+                                <p className='mr-4 text-left '>Date:</p>
+                                <p className='text-center text-rose-600'>{stockAndNew.stock_data[key]["latest_date"]}</p>
+                               
                               </div>
                               <div className='flex gap-x-1 justify-center text-left'>
-                                <p className='mr-4 text-left'>high:</p>
+                                <p className='mr-4 text-left '>High:</p>
                                 <p className='text-center text-rose-600'>{stockAndNew.stock_data[key].high}</p>
                               </div>
                               <div className='flex gap-x-1 justify-center text-left'>
-                                <p className='mr-4 text-left'>latest date:</p>
-                                <p className='text-center text-rose-600'>{stockAndNew.stock_data[key]["latest date"]}</p>
-                              </div>
-                              <div className='flex gap-x-1 justify-center text-left'>
-                                <p className='mr-4 text-left'>low:</p>
+                               <p className='mr-4 text-left '>Low:</p>
                                 <p className='text-center text-rose-600'>{stockAndNew.stock_data[key].low}</p>
                               </div>
                               <div className='flex gap-x-1 justify-center text-left'>
-                                <p className='mr-4 text-left'>open:</p>
+                               <p className='mr-4 text-left '>Open:</p>
                                 <p className='text-center text-rose-600'>{stockAndNew.stock_data[key].open}</p>
                               </div>
                               <div className='flex gap-x-1 justify-center text-left'>
-                                <p className='mr-4 text-left'>volume:</p>
+                              <p className='mr-4 text-left '>Close:</p>
+                                <p className='text-center text-rose-600'>{stockAndNew.stock_data[key].close}</p>
+                              </div>
+                              <div className='flex gap-x-1 justify-center text-left'>
+                                <p className='mr-4 text-left'>Volume:</p>
                                 <p className='text-center text-rose-600'>{stockAndNew.stock_data[key].volume}</p>
                               </div>
                             </div>
@@ -264,7 +266,7 @@ function App() {
               </div>
 
               <div className='mt-4'>
-                <p className='text-center text-2xl font-bold'>Report</p>
+                <p className='text-center text-2xl font-bold'>Summary</p>
                 <div className='w-full text-lg py-4 overflow-auto h-80'>
                   {
                     report ? report : 'Loading...'
