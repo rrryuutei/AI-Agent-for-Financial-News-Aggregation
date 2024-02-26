@@ -74,7 +74,7 @@ h2::after {
 }
 
 .workflow-figure img {
-    max-width: 80%; 
+    max-width: 60%; 
     height: auto; 
     border-radius: 4px; 
     /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);  */
