@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Title</title>
+    <title>FinNews AI - NoraLiu</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@900&display=swap" rel="stylesheet">
 </head>
@@ -11,15 +11,22 @@
     <header>
         <h1>AI Agent for Financial News</h1>
         <p>Code: <a href="https://github.com/rrryuutei/AI-Agent-for-Financial-News-Aggregation " target="_blank">Github Page</a></p>
-        <p>Team Members: <a href="https://www.linkedin.com/in/tingliu319/">Nora (Ting) Liu</a>, Ted Zhao</p>
+        <p>Author: <a href="https://www.linkedin.com/in/tingliu319/">Nora (Ting) Liu</a>, Ted Zhao</p>
     </header>
-
-<section id="intro">
-    <h2>Introduction</h2>
+    
+    <section id="intro">
+        <h2>Introduction</h2>
         <div class="intro-text">
-            <p>Transforming financial news with Al precision. Get real-time, personalized updates from 10,000+ sources, tailored to your investment preferences. Simplify decision-making and stay ahead in the market, effortlessly.</p>
+            <p>GPT-4, as of its last update in September 2021, does not possess real-time knowledge or data. However, our FinNews AI bridges this gap by integrating the latest news and data to remain current with the evolving world.</p>
+            <p> Here's how we stand out:</p>
+            <ul>
+                <li><strong>Real-time Updates:</strong> Connects with current events by fetching the latest financial news and data.</li>
+                <li><strong>Quick Insights:</strong> Delivers explanations on stock movements, like Nvidia's, within 10 seconds.</li>
+                <li><strong>User-Focused:</strong> Designed to keep you informed with the most recent and relevant financial information.</li>
+            </ul>
         </div>
-</section>
+    </section>
+    
     
     <section id="demo-video">
         <h2>Demo Videos</h2>
@@ -41,26 +48,6 @@
         </div>
     </section>
     
-    
-
-    <div class="vivid-text">
-        <section id="workflow">
-            <h2>What's Under the Hood?</h2>
-            <p>GPT-4 does not know anything after Sept. 2021.  <br>
-                Our AI agent is able to utilize external tools like APIs to retrieve what it needs. In this way we inject the most recent news and data into the model. Here is how it works:</p>
-            <ol class="aligned-list">
-                <li><strong> Planning: <strong> Determine what are the most relevant stocks to explore. </li>
-                <li><strong> Retrieving:<strong>  Use API to retrieve the most recent data and news about the stocks.</li>
-                <li><strong> Analyzing: Analyz <strong> the recent data and news, retrospect on its initial planning and retrieve more data to reflect the most recent trend.</li>
-                <li><strong> Summarizing: <strong> A well-written answer is summarized by the AI agent based on all the relevant news and data</li>
-            </ol>
-        </section>
-    </div>
-
-    <div class="workflow-figure">
-        <img src="AIAgent.png" alt="Workflow Figure">
-    </div>
-
     <div class="vivid-text">
         <section id="workflow">
             <h2>Technical Details</h2>
@@ -70,20 +57,40 @@
                     Back-end:
                     <ul>
                         <li>Integrating OpenAI API and YahooFinance API to retrieve news and stock market data, for summarization and categorization</li>
-                        <li>Employing Flask for Cross-Origin Resource Sharing (CORS) configuration to ensure securely request resources from various origins</li>
+                        <li>Employing Flask for Cross-Origin Resource Sharing (CORS) configuration to ensure request resources from various origins</li>
                     </ul>
                 </li>
                 <li>
                     Front-end:
                     <ul>
                         <li> Concurrently fetch data in React, tracking progress and handling errors gracefully with state management</li>
-                        <li>Event Listening & State Updates: Implement dynamic content visibility in React through wheel event listening and responsive state updates</li>
+                        <li> Implement dynamic content visibility in React through wheel event listening and responsive state updates</li>
                     </ul>
                 </li>
             </ul>
         </section>
     </div>
     
+    <div class="workflow-figure">
+        <img src="AIAgent.png" alt="Workflow Figure">
+    </div>
+
+    <div class="vivid-text">
+        <section id="workflow">
+            <h2>What's Under the Hood?</h2>
+            <p>Transforming financial news with Al precision. Get real-time, personalized updates from 10,000+ sources, tailored to your investment preferences. Simplify decision-making and stay ahead in the market, effortlessly. <br>
+                Here is how it works:</p>
+            <ol class="aligned-list">
+                <li><strong> Planning: <strong> Determine what are the most relevant stocks to explore </li>
+                <li><strong> Retrieving:<strong>  Use API to retrieve the most recent data and news about the stocks</li>
+                <li><strong> Analyzing: Analyz <strong> the recent data and news, retrospect on its initial planning and retrieve more data to reflect the most recent trend</li>
+                <li><strong> Summarizing: <strong> A well-written answer is summarized by the AI agent based on all the relevant news and data</li>
+            </ol>
+        </section>
+    </div>
+
+   
+
 
 </body>
 </html>

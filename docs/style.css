@@ -46,6 +46,12 @@ section {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+.intro-text p {
+    line-height: 1.6; /* Enhanced line spacing for readability */
+    color: #333; /* Darker text for better contrast */
+}
+
+
 h2 {
     font-family: 'Lato', sans-serif;
     color: #0056b3;
@@ -108,14 +114,16 @@ section:hover {
 }
 .video-container {
     display: flex;
-    justify-content: space-around;
-    align-items: flex-start; 
-    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column; 
 }
 
 .video-item {
-    width: 48%; 
-    margin-bottom: 20px; 
+    width: 80%; 
+    margin-bottom: 40px; 
+    margin-left: auto; 
+    margin-right: auto;
 }
 
 video {
@@ -128,5 +136,5 @@ video {
     color: #333; 
     font-size: 16px;
     margin-top: 10px; 
+    margin-bottom: 10px; 
 }
-
