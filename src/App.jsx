@@ -81,7 +81,7 @@ function App() {
         <div className='flex gap-x-3'>
           <Button onClick={_ => confirm({
             title: 'Contact Us',
-            content: 'Please emain at noraliu319@gmail.com...',
+            content: 'Please emain Nora Liu, noraliu2023@gmail.com </a>',
             onOk() {
               console.log('OK');
             },
@@ -131,7 +131,7 @@ function App() {
 
           }}
             className='w-52 p-3 py-4 rounded-lg bg-blue-600 hover:bg-blue-700 transition-all cursor-pointer' style={{}}>
-            Search news
+            Get Insights!
           </div>
         </div>
         <div className='mt-4 text-gray-400'>
